@@ -27,7 +27,7 @@ HUSHFILE_PC_LIBS=
 PKG_PROG_PKG_CONFIG([0.9.0])
 
 PKG_CHECK_MODULES([openssl], [openssl])
-PKG_CHECK_MODULES([libcurl], [curl])
+PKG_CHECK_MODULES([curl], [libcurl])
 
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
