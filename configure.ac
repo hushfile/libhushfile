@@ -20,16 +20,13 @@ if test x"$ac_cv_prog_cc_c99" = x"no" ; then
     AC_MSG_ERROR([Hushfile-CLI requires a C compiler that supports ISO C99])
 fi
 
-HUSHFILE_CFLAGS=
-HUSHFILE_PC_CFLAGS=
-HUSHFILE_PC_LIBS=
-
 PKG_PROG_PKG_CONFIG([0.9.0])
 
 PKG_CHECK_MODULES([openssl], [openssl])
 PKG_CHECK_MODULES([curl], [libcurl])
 
-m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+HUSHFILE_CFLAGS="$HUSHFILE_CFLAGS $curl_CFLAGS $openssl_CFLAGS"
+HUSHFILE_LIBS="$HUSHFILE_LIBS $curl_LIBS $openssl_LIBS"
 
 GENERATED_FILE=misc/generated.txt
 AC_SUBST_FILE(GENERATED_FILE)
@@ -52,16 +49,13 @@ AC_ARG_WITH([git-head], AS_HELP_STRING([--with-git-head], [Specify Git head]), G
 AC_MSG_RESULT([$GITHEAD])
 AC_SUBST([GITHEAD])
 
-m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
-
 TEST_CFLAGS="-pedantic -Wall -W -Wextra -Wbad-function-cast -Wcast-align -Wcast-qual -Wfloat-equal -Wformat=2 -Wformat-security -Wformat-nonliteral -Winit-self -Winline -Wlogical-op -Wmissing-prototypes -Wmissing-declarations -Wmissing-format-attribute -Wmissing-noreturn -Wpointer-arith -Wredundant-decls -Wshadow -Wswitch-default -Wunused"
 for cflag in $TEST_CFLAGS ; do
     AX_CHECK_COMPILER_FLAGS([$cflag], [HUSHFILE_CFLAGS="$HUSHFILE_CFLAGS $cflag"], [])
 done
 
 AC_SUBST([HUSHFILE_CFLAGS])
-AC_SUBST([HUSHFILE_PC_CFLAGS])
-AC_SUBST([HUSHFILE_PC_LIBS])
+AC_SUBST([HUSHFILE_LIBS])
 
 AC_CONFIG_HEADER(config.h)
 AC_OUTPUT(
