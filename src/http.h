@@ -27,13 +27,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GUARD_HUSHFILE_H
-#define GUARD_HUSHFILE_H 1
-
-#define DEFAULT_HUSHFILE_URL "https://hushfile.it/"
+#ifndef GUARD_HTTP_H
+#define GUARD_HTTP_H 1
 
 #include "environment.h"
-#include "http.h"
-#include "utilities.h"
+
+void download_file(Environment *env, const char *url, const char *destination_path);
+void upload_file(Environment *env, const char *url, const char *source_path);
 
 #endif

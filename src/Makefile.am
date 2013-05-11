@@ -4,8 +4,10 @@ hushfile_CFLAGS = @HUSHFILE_CFLAGS@
 hushfile_LDADD = @HUSHFILE_LIBS@
 
 hushfile_SOURCES = \
+	environment.h \
+	http.c \
+	http.h \
 	hushfile.c \
 	hushfile.h \
 	utilities.c \
-	utilities.h \
-	environment.h
+	utilities.h

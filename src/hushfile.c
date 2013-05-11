@@ -27,7 +27,6 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <assert.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -135,15 +134,12 @@ int main(int argc, char *argv[])
     // Initialize Curl.
     curl_global_init(CURL_GLOBAL_DEFAULT);
 
-    CURL *curl;
-    curl = curl_easy_init();
-    assert(curl);
-
     if (upload)
     {
     }
     else
     {
+        download_file(env, "https://secure.0x90.dk/~ahf/6e2c371e29a08c3e24eaecf94dc5577f.tar.gz", "/tmp/lol");
     }
 
     // Cleanup.
