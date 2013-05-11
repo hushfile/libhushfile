@@ -27,6 +27,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdarg.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "utilities.h"
@@ -34,4 +36,14 @@
 bool strprefix(const char *a, const char *b)
 {
     return strncmp(a, b, strlen(b)) == 0;
+}
+
+int hprintf(Environment *env, const char * restrict format, ...)
+{
+    if (env->quiet)
+        return 0;
+
+    va_list arguments;
+
+    return vprintf(format, arguments);
 }

@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
         {
             // Quiet.
             case 'q':
-                env->quiet = false;
+                env->quiet = true;
                 break;
 
             // Override MIME-type.
@@ -135,11 +135,11 @@ int main(int argc, char *argv[])
 
     if (upload)
     {
-        printf("Uploading ...\n");
+        hprintf(env, "Uploading ...\n");
     }
     else
     {
-        printf("Downloading ...\n");
+        hprintf(env, "Downloading ...\n");
     }
 
     // Cleanup.

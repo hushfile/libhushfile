@@ -7,4 +7,5 @@ hushfile_SOURCES = \
 	hushfile.c \
 	hushfile.h \
 	utilities.c \
-	utilities.h
+	utilities.h \
+	environment.h

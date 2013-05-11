@@ -27,16 +27,16 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GUARD_UTILITIES_H
-#define GUARD_UTILITIES_H 1
+#ifndef GUARD_ENVIRONMENT_H
+#define GUARD_ENVIRONMENT_H 1
 
 #include <stdbool.h>
 
-#include "environment.h"
-
-// Check if string a begins with string b.
-bool strprefix(const char *a, const char *b);
-
-int hprintf(Environment *env, const char * restrict format, ...);
+typedef struct {
+    bool quiet;
+    char *mime_type_override;
+    char *filename_override;
+    char *password;
+} Environment;
 
 #endif
