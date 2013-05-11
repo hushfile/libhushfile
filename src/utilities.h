@@ -37,6 +37,17 @@
 // Check if string a begins with string b.
 bool strprefix(const char *a, const char *b);
 
+// printf-wrapper that checks if env->quiet is set.
 int hprintf(Environment *env, const char * restrict format, ...);
+
+typedef struct
+{
+    char *identifier;
+    char *key;
+} HushfileIdentifier;
+
+HushfileIdentifier *parse_identifier(const char *url);
+
+void free_identifier(HushfileIdentifier *identifier);
 
 #endif

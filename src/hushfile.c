@@ -141,11 +141,9 @@ int main(int argc, char *argv[])
 
     if (upload)
     {
-        hprintf(env, "Uploading ...\n");
     }
     else
     {
-        hprintf(env, "Downloading ...\n");
     }
 
     // Cleanup.

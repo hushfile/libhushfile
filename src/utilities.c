@@ -53,3 +53,36 @@ int hprintf(Environment *env, const char * restrict format, ...)
 
     return r;
 }
+
+HushfileIdentifier *parse_identifier(const char *url)
+{
+    // Format: https://xxx/[a-zA-Z0-9]#KEY
+    char *identifier = alloca(100 * sizeof(char));
+    char *key = alloca(100 * sizeof(char));
+
+    if (sscanf(url, "https://%*[^/]/%99[^#]#%99s", identifier, key) != 2)
+        return NULL;
+
+    HushfileIdentifier *x = malloc(sizeof(HushfileIdentifier));
+    x->identifier = strdup(identifier);
+    x->key = strdup(key);
+
+    memset(identifier, 0, 100);
+    memset(key, 0, 100);
+
+    return x;
+}
+
+void free_identifier(HushfileIdentifier *identifier)
+{
+    if (identifier == NULL)
+        return;
+
+    if (identifier->identifier != NULL)
+        free(identifier->identifier);
+
+    if (identifier->key != NULL)
+        free(identifier->key);
+
+    free(identifier);
+}
