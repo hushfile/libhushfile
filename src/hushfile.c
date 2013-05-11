@@ -39,7 +39,7 @@
 
 static void usage(const char *name)
 {
-    fprintf(stderr, "Usage: %s [-qmfhp] [file]\n", name);
+    fprintf(stderr, "Usage: %s [-qmfhp] [file | url]\n", name);
 }
 
 int main(int argc, char *argv[])
@@ -100,9 +100,7 @@ int main(int argc, char *argv[])
 
     CURL *curl;
     curl = curl_easy_init();
-
     assert(curl);
-
 
     // Cleanup.
     curl_global_cleanup();
