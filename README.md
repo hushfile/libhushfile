@@ -5,7 +5,7 @@ Hushfile-CLI is a command line interface for the encrypted file share service
 [Hushfile](https://hushfile.it/).
 
 The source code for the Hushfile service is available from the [Hushfile Github
-repository](https://github.com/tykling/hushfile).
+repository](https://github.com/hushfile/hushfile).
 
 Authors
 =======
