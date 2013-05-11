@@ -29,6 +29,7 @@
 
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "utilities.h"
@@ -43,7 +44,12 @@ int hprintf(Environment *env, const char * restrict format, ...)
     if (env->quiet)
         return 0;
 
+    int r;
     va_list arguments;
 
-    return vprintf(format, arguments);
+    va_start(arguments, format);
+    r = vprintf(format, arguments);
+    va_end(arguments);
+
+    return r;
 }
