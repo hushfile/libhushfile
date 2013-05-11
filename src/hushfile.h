@@ -32,6 +32,8 @@
 
 #include <stdbool.h>
 
+#include "utilities.h"
+
 typedef struct {
     bool quiet;
     char *mime_type_override;

@@ -47,6 +47,9 @@ int main(int argc, char *argv[])
     // Cursor.
     int c;
 
+    // Store argv[0].
+    const char *program_name = argv[0];
+
     // Environment.
     Environment *env = malloc(sizeof(Environment));
 
@@ -81,19 +84,47 @@ int main(int argc, char *argv[])
 
             // Display usage.
             default:
-                usage(argv[0]);
+                usage(program_name);
                 return EXIT_FAILURE;
         }
     }
 
     if (argc - optind < 1)
     {
-        usage(argv[0]);
+        usage(program_name);
         return EXIT_FAILURE;
     }
 
     argc -= optind;
     argv += optind;
+
+    const char *filename = argv[0];
+
+    if (filename == NULL)
+    {
+        usage(program_name);
+        return EXIT_FAILURE;
+    }
+
+    // Figure out if we are going to upload or download.
+    bool upload = false;
+
+    if (access(filename, F_OK) != -1)
+    {
+        // File exists and we are going to upload it.
+        upload = true;
+    }
+    else
+    {
+        // File does not exist and we need to check if it's an URL.
+        if (strprefix(filename, "https://"))
+            upload = false;
+        else
+        {
+            usage(program_name);
+            return EXIT_FAILURE;
+        }
+    }
 
     // Initialize Curl.
     curl_global_init(CURL_GLOBAL_DEFAULT);
@@ -101,6 +132,15 @@ int main(int argc, char *argv[])
     CURL *curl;
     curl = curl_easy_init();
     assert(curl);
+
+    if (upload)
+    {
+        printf("Uploading ...\n");
+    }
+    else
+    {
+        printf("Downloading ...\n");
+    }
 
     // Cleanup.
     curl_global_cleanup();
