@@ -57,8 +57,9 @@ int main(int argc, char *argv[])
     env->mime_type_override = NULL;
     env->filename_override = NULL;
     env->password = NULL;
+    env->hushfile_url = DEFAULT_HUSHFILE_URL;
 
-    while (-1 != (c = getopt(argc, argv, "m:f:qhp")))
+    while (-1 != (c = getopt(argc, argv, "m:f:u:qhp")))
     {
         switch (c)
         {
@@ -75,6 +76,11 @@ int main(int argc, char *argv[])
             // Override Filename.
             case 'f':
                 env->filename_override = optarg;
+                break;
+
+            // Override Hushfile URL.
+            case 'u':
+                env->hushfile_url = optarg;
                 break;
 
             // Override default randomly generated password

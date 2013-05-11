@@ -36,6 +36,7 @@ typedef struct {
     bool quiet;
     char *mime_type_override;
     char *filename_override;
+    char *hushfile_url;
     char *password;
 } Environment;
 
