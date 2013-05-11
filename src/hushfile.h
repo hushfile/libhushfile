@@ -30,6 +30,8 @@
 #ifndef GUARD_HUSHFILE_H
 #define GUARD_HUSHFILE_H 1
 
+#define DEFAULT_HUSHFILE "https://hushfile.it/"
+
 #include "environment.h"
 #include "utilities.h"
 
