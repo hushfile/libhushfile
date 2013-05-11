@@ -38,7 +38,8 @@
 bool strprefix(const char *a, const char *b);
 
 // printf-wrapper that checks if env->quiet is set.
-int hprintf(Environment *env, const char * restrict format, ...);
+int hprintf(Environment *env, const char * restrict format, ...) __attribute__((format(printf, 2, 3)));
+
 
 typedef struct
 {
@@ -47,7 +48,6 @@ typedef struct
 } HushfileIdentifier;
 
 HushfileIdentifier *parse_identifier(const char *url);
-
 void free_identifier(HushfileIdentifier *identifier);
 
 #endif
