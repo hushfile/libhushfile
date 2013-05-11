@@ -5,4 +5,6 @@ hushfile_LDADD = @HUSHFILE_LIBS@
 
 hushfile_SOURCES = \
 	hushfile.c \
-	hushfile.h
+	hushfile.h \
+	utilities.c \
+	utilities.h
