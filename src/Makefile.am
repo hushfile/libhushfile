@@ -1,7 +1,7 @@
 bin_PROGRAMS = hushfile
 
 hushfile_CFLAGS = @HUSHFILE_CFLAGS@
-hushfile_LDADD = @HUSHFILE_LIBS@
+hushfile_LDADD = @HUSHFILE_LIBS@ $(LIBM)
 
 hushfile_SOURCES = \
 	environment.h \
