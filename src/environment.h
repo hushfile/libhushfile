@@ -38,6 +38,7 @@ typedef struct {
     char *filename_override;
     char *hushfile_url;
     char *password;
+    char *config;
 } Environment;
 
 #endif

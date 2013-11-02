@@ -57,6 +57,7 @@ int main(int argc, char *argv[])
     env->filename_override = NULL;
     env->password = NULL;
     env->hushfile_url = DEFAULT_HUSHFILE_URL;
+    env->config = DEFAULT_HUSHFILE_CONFIG_PATH;
 
     while (-1 != (c = getopt(argc, argv, "m:f:u:qhp")))
     {
