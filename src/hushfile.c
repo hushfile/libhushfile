@@ -124,6 +124,11 @@ int main(int argc, char *argv[])
         // File does not exist and we need to check if it's an URL.
         if (strprefix(filename, "https://"))
             upload = false;
+        else if (strprefix(filename, "http://"))
+        {
+            fprintf(stderr, "Are you sure you didn't mean https:// ?\n");
+            return EXIT_FAILURE;
+        }
         else
         {
             usage(program_name);
