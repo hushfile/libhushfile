@@ -96,7 +96,7 @@ void download_file(Environment *env, const char *url, const char *destination_pa
     CURL *curl;
     CURLcode result = CURLE_OK;
     curl = curl_easy_init();
-    assert(curl);
+    assert(curl != NULL);
 
     // Initialize.
     curl_easy_setopt(curl, CURLOPT_URL, url);
@@ -109,8 +109,6 @@ void download_file(Environment *env, const char *url, const char *destination_pa
     // SSL options.
     curl_easy_setopt(curl, CURLOPT_SSL_CTX_FUNCTION, ssl_context_callback);
     curl_easy_setopt(curl, CURLOPT_SSL_CTX_DATA, env);
-
-    // SS
 
     // Write callback.
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
