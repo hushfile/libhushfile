@@ -38,7 +38,7 @@
 
 static void usage(const char *name)
 {
-    fprintf(stderr, "Usage: %s [-qmfhp] [file | url]\n", name);
+    fprintf(stderr, "Usage: %s [-qmfhpc] [file | url]\n", name);
 }
 
 int main(int argc, char *argv[])
@@ -50,16 +50,9 @@ int main(int argc, char *argv[])
     const char *program_name = argv[0];
 
     // Environment.
-    Environment *env = malloc(sizeof(Environment));
+    Environment *env = initialize_environment();
 
-    env->quiet = false;
-    env->mime_type_override = NULL;
-    env->filename_override = NULL;
-    env->password = NULL;
-    env->hushfile_url = DEFAULT_HUSHFILE_URL;
-    env->config = DEFAULT_HUSHFILE_CONFIG_PATH;
-
-    while (-1 != (c = getopt(argc, argv, "m:f:u:qhp")))
+    while (-1 != (c = getopt(argc, argv, "m:f:u:p:c:qh")))
     {
         switch (c)
         {
@@ -83,9 +76,14 @@ int main(int argc, char *argv[])
                 env->hushfile_url = optarg;
                 break;
 
-            // Override default randomly generated password
+            // Override default randomly generated password.
             case 'p':
                 env->password = optarg;
+                break;
+
+            // Override default configuration path.
+            case 'c':
+                env->config = optarg;
                 break;
 
             // Display usage.

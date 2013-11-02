@@ -4,6 +4,7 @@ hushfile_CFLAGS = @HUSHFILE_CFLAGS@
 hushfile_LDADD = @HUSHFILE_LIBS@ $(LIBM)
 
 hushfile_SOURCES = \
+	environment.c \
 	environment.h \
 	http.c \
 	http.h \

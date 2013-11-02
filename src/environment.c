@@ -2,7 +2,6 @@
 
 /*
  * Copyright (c) 2013 Alexander Færøy
- * Copyright (c) 2013 Thomas Steen Rasmussen
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,20 +26,18 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GUARD_ENVIRONMENT_H
-#define GUARD_ENVIRONMENT_H 1
+#include <stdlib.h>
 
-#include <stdbool.h>
+#include "environment.h"
+#include "hushfile.h"
 
-typedef struct {
-    bool quiet;
-    char *mime_type_override;
-    char *filename_override;
-    char *hushfile_url;
-    char *password;
-    char *config;
-} Environment;
+Environment *initialize_environment()
+{
+    Environment *env = calloc(1, sizeof(Environment));
 
-Environment *initialize_environment();
+    // All values are NULL due to calloc().
+    env->hushfile_url = DEFAULT_HUSHFILE_URL;
+    env->config = DEFAULT_HUSHFILE_CONFIG_PATH;
 
-#endif
+    return env;
+}
