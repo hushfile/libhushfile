@@ -38,7 +38,7 @@ typedef struct {
     char *filename_override;
     char *hushfile_url;
     char *password;
-    char *config;
+    char *config_path;
 } Environment;
 
 Environment *initialize_environment();

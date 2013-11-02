@@ -30,6 +30,7 @@
 
 #include "environment.h"
 #include "hushfile.h"
+#include "utilities.h"
 
 Environment *initialize_environment()
 {
@@ -37,7 +38,7 @@ Environment *initialize_environment()
 
     // All values are NULL due to calloc().
     env->hushfile_url = DEFAULT_HUSHFILE_URL;
-    env->config = DEFAULT_HUSHFILE_CONFIG_PATH;
+    env->config_path = expand_tilde(DEFAULT_HUSHFILE_CONFIG_PATH);
 
     return env;
 }

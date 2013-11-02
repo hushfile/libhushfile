@@ -27,10 +27,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <errno.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
+
+#include <glib.h>
 
 #include <curl/curl.h>
 
@@ -83,7 +87,10 @@ int main(int argc, char *argv[])
 
             // Override default configuration path.
             case 'c':
-                env->config = optarg;
+                if (env->config_path != NULL)
+                    free(env->config_path);
+
+                env->config_path = expand_tilde(optarg);
                 break;
 
             // Display usage.
@@ -137,6 +144,25 @@ int main(int argc, char *argv[])
 
     // Initialize Curl.
     curl_global_init(CURL_GLOBAL_DEFAULT);
+
+    // Check if configuration directory exists, otherwise create it.
+    char *config_dir_name = g_path_get_dirname(env->config_path);
+
+    if (! g_file_test(config_dir_name, G_FILE_TEST_EXISTS))
+    {
+        // Create the config directory.
+        if (g_mkdir(config_dir_name, 0500) == -1)
+        {
+            fprintf(stderr, "Error: Unable to create configuration directory %s: %s\n", config_dir_name, strerror(errno));
+            free(config_dir_name);
+
+            return EXIT_FAILURE;
+        }
+
+        fprintf(stderr, "Creating configuration directory ...\n");
+    }
+
+    free(config_dir_name);
 
     if (upload)
     {

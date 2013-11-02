@@ -32,6 +32,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <glib.h>
+
 #include "utilities.h"
 
 bool strprefix(const char *a, const char *b)
@@ -52,6 +54,17 @@ int hprintf(Environment *env, const char * restrict format, ...)
     va_end(arguments);
 
     return r;
+}
+
+char *expand_tilde(const char *f)
+{
+    if (! f)
+        return NULL;
+
+    if (f[0] != '~')
+        return g_strdup(f);
+
+    return g_strconcat(g_get_home_dir(), f + 1, NULL);
 }
 
 HushfileIdentifier *parse_identifier(const char *url)
